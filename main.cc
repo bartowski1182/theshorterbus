@@ -48,8 +48,11 @@ int main()
             
             getline(ifs, line);
 
+            if(line[0] == '#')
+                continue;
+
             string buffer = "";
-            buffer = string(SIMC_PATH) + " armory=" + line + " calculate_scale_factors=1 html=" + RESULTS_DIR + fileName + ".html xml=" + RESULTS_DIR + fileName + ".xml";
+            buffer = string(SIMC_PATH) + " armory=" + line + " calculate_scale_factors=1 iterations=10000 html=" + RESULTS_DIR + fileName + ".html xml=" + RESULTS_DIR + fileName + ".xml";
             
             buffer += generateTrinkets(&ifs, fileName);
             printf("%s\n", buffer.c_str());
