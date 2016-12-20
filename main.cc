@@ -1,4 +1,31 @@
 #include "defs.h"
+
+string generateTrinkets(ifstream * input, string name)
+{
+    string result = "";
+    int counter = 0;
+    string line = "";
+    string * trinkets;
+    trinkets = new string[MAX_TRINKETS];
+    while(getline(*input, line))
+    {
+        trinkets[counter] = line;
+        counter++;
+    }
+
+    int copyCounter = 1;
+    
+    for(int i = 0; i < counter; i++)
+    {
+        for(int j = i + 1; j < counter; j++)
+        {
+            result += string(" copy=\"") + name + "_" + to_string(copyCounter++) + "\" trinket1=" + trinkets[i] + " trinket2=" + trinkets[j];
+        }
+    }
+    delete[] trinkets;
+    return result;
+}
+
 int main()
 {
     string line;
@@ -19,12 +46,14 @@ int main()
             
             ifstream ifs(fullFileName.c_str());
             
-            while(getline(ifs, line))
-            {
-                char buffer[100];
-                snprintf(buffer, sizeof(buffer), "simc/engine/simc armory=%s calculate_scale_factors=1", line.c_str());
-                printf("%s\n", buffer);
-            }
+            getline(ifs, line);
+
+            string buffer = "";
+            buffer = string(SIMC_PATH) + " armory=" + line + " calculate_scale_factors=1 html=" + RESULTS_DIR + fileName + ".html xml=" + RESULTS_DIR + fileName + ".xml";
+            
+            buffer += generateTrinkets(&ifs, fileName);
+            printf("%s\n", buffer.c_str());
+            system(buffer.c_str());
         }
     }
     return 0;
