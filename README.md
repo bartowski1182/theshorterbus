@@ -8,7 +8,8 @@ Will also toy with idea of removing trinkets from the initial baseline if people
 
 May also experiment with dynamic arrays for trinkets. I have a couple lazy things in there already though so maybe not.
 
-Currently working on: 
+Currently working on: receiving trinket list from server or something. dunno
 
 Future work: parse the XML results and get interesting information such as stat priorities (only for highest dps run? maybe.)
                     - shouldn't be too too hard, predictable XML is fairly easy to parse, just need to find right tool
+             host the .html results on theshorterbus.com
